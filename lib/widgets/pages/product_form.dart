@@ -13,9 +13,13 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Добавить в список')),
-      body: Center(
-        child: AppTextStyle(widget.product),
+      appBar: AppBar(
+        title: const Text('Редактировать'),
+      ),
+      body: SafeArea(
+        child: Center(
+          child: AppTextStyle(widget.product),
+        ),
       ),
     );
   }

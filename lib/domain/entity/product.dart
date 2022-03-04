@@ -6,10 +6,13 @@ abstract class Measure {
   static const liters = 'л.';
 } // надо ли переделать на энам?
 
-class Products {
-  final String label;
+class Product {
+  final String name;
   final int quantity;
   String measure;
 
-  Products({this.label = 'бананбананбананбананбананбанан', this.quantity = 1, this.measure = Measure.piece});
+  Product(
+      {this.name = 'бананбананбананбананбананбанан',
+      this.quantity = 1,
+      this.measure = Measure.piece});
 }
