@@ -42,10 +42,33 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView.builder(
           itemCount: 10,
           itemBuilder: (BuildContext context, int index) {
-            return Text(product.label);
+            return ProductsListTile(
+              title: product.label,
+              quantity: product.quantity,
+              measure: product.measure,
+            );
           },
         ),
       ),
+    );
+  }
+}
+
+class ProductsListTile extends StatelessWidget {
+  const ProductsListTile(
+      {Key? key,
+      required this.title,
+      required this.quantity,
+      required this.measure})
+      : super(key: key);
+  final String title;
+  final int quantity;
+  final String measure;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text('$title: $quantity $measure'),
     );
   }
 }
