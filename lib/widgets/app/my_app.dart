@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/products.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/product_form.dart';
+import 'package:my_to_do_shopping_list/widgets/style/text_style.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -21,31 +23,38 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final product = Products();
-
-  @override
   Widget build(BuildContext context) {
+    final product = Products();
     return Scaffold(
+      backgroundColor: Colors.tealAccent,
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: SafeArea(
         child: ListView.builder(
           itemCount: 10,
           itemBuilder: (BuildContext context, int index) {
-            return ProductsListTile(
-              title: product.label,
-              quantity: product.quantity,
-              measure: product.measure,
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ProductFormWidget(product: product.label);
+                    },
+                  ),
+                );
+              },
+              child: ProductsListTile(
+                title: product.label,
+                quantity: product.quantity,
+                measure: product.measure,
+              ),
             );
           },
         ),
@@ -67,8 +76,27 @@ class ProductsListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text('$title: $quantity $measure'),
+    return Card(
+      elevation: 3.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+        child: Row(
+          children: <Widget>[
+            SizedBox(
+              width: 200.0,
+              child: AppTextStyle(
+                '$title: ',
+                fontSize: 18.0,
+              ),
+            ),
+            AppTextStyle(
+              '  ${quantity.toString()} $measure',
+              color: Colors.black87,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

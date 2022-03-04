@@ -4,12 +4,12 @@ abstract class Measure {
   static const gram = 'гр.';
   static const bottles = 'бут.';
   static const liters = 'л.';
-}
+} // надо ли переделать на энам?
 
 class Products {
   final String label;
   final int quantity;
   String measure;
 
-  Products({this.label = 'банан', this.quantity = 1, this.measure = Measure.piece});
+  Products({this.label = 'бананбананбананбананбананбанан', this.quantity = 1, this.measure = Measure.piece});
 }
