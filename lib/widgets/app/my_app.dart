@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: theme.copyWith(
         brightness: Brightness.dark,
         colorScheme: theme.colorScheme.copyWith(
-          primary: Colors.white,
+          primary: Colors.blueGrey,
           secondary: Colors.blueGrey[700],
         ),
       ),

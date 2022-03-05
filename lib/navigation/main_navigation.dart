@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/product_create.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/product_form.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list.dart';
@@ -18,9 +19,9 @@ class MainNavigation {
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case MainNavigationRouteNames.productsForm:
-        final productName = settings.arguments as String;
+        final product = settings.arguments as Product;
         return MaterialPageRoute(
-          builder: (context) => ProductFormWidget(product: productName),
+          builder: (context) => ProductFormWidget(product: product),
         );
       case MainNavigationRouteNames.productsList:
         final title = settings.arguments as String;

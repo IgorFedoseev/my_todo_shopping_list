@@ -24,18 +24,16 @@ class ProductsListWidget extends StatelessWidget {
       ),
       body: SafeArea(
         child: ListView.builder(
-          itemCount: 25,
+          itemCount: Product.examples.length,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
               onTap: () {
                 Navigator.of(context).pushNamed(
                     MainNavigationRouteNames.productsForm,
-                    arguments: product.name);
+                    arguments: product);
               },
               child: ProductCardWidget(
-                title: product.name,
-                quantity: product.quantity,
-                measure: product.measure,
+                  Product.examples[index],
               ),
             );
           },

@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 import 'package:my_to_do_shopping_list/widgets/style/text_style.dart';
 
 class ProductCardWidget extends StatelessWidget {
   const ProductCardWidget(
-      {Key? key,
-        required this.title,
-        required this.quantity,
-        required this.measure})
+      this.product,
+      {Key? key,})
       : super(key: key);
-  final String title;
-  final int quantity;
-  final String measure;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +21,12 @@ class ProductCardWidget extends StatelessWidget {
             SizedBox(
               width: 200.0,
               child: AppTextStyle(
-                '$title: ',
+                '${product.name}: ',
                 fontSize: 18.0,
               ),
             ),
             AppTextStyle(
-              '  ${quantity.toString()} $measure',
+              '  ${product.quantity.toString()} ${product.measure}',
               color: Colors.black87,
             ),
           ],

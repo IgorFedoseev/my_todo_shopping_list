@@ -3,10 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTextStyle extends StatelessWidget {
   const AppTextStyle(
-       this.text,
-      {
+    this.text, {
     Key? key,
-
     this.fontSize = 16.0,
     this.fontWeight = FontWeight.w300,
     this.color = Colors.black,
@@ -18,11 +16,13 @@ class AppTextStyle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text,
-        style: GoogleFonts.russoOne(
-          fontSize: fontSize,
-          fontWeight: fontWeight,
-          color: color,
-        ));
+    return Text(
+      text,
+      style: GoogleFonts.russoOne(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        color: color,
+      ),
+    );
   }
 }
