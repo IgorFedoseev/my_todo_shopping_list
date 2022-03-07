@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
-import 'package:my_to_do_shopping_list/widgets/style/text_style.dart';
 
 class ProductFormWidget extends StatefulWidget {
   const ProductFormWidget({Key? key, required this.product}) : super(key: key);
@@ -21,6 +20,7 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.headline3;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Редактировать'),
@@ -42,13 +42,29 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
                       TextFormField(
                         initialValue: widget.product.name,
                         autofocus: true,
-                        cursorColor: Colors.blueGrey,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
+                        cursorColor: Colors.teal,
+                        style: textStyle,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.teal,
+                            ),
                         ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                            borderSide: const BorderSide(
+                              color: Colors.teal,
+                              width: 2.0,
+                            ),
+                          ),
+                      ),
                       ),
                       const SizedBox(height: 10.0),
-                      AppTextStyle('$_sliderValue'),
+                      Text(
+                        '$_sliderValue',
+                        style: textStyle,
+                      ),
                       const SizedBox(height: 10.0),
                       Slider(
                         min: 1,

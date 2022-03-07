@@ -11,7 +11,6 @@ class ProductsListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final product = Product();
     return Scaffold(
-      backgroundColor: Colors.tealAccent,
       appBar: AppBar(
         title: Text(title),
       ),

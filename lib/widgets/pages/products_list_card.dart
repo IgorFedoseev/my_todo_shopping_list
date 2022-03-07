@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
-import 'package:my_to_do_shopping_list/widgets/style/text_style.dart';
 
 class ProductCardWidget extends StatelessWidget {
   const ProductCardWidget(
@@ -11,6 +10,8 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.headline3;
+    final titleListTextStyle = Theme.of(context).textTheme.headline2;
     return Card(
       elevation: 3.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
@@ -20,14 +21,14 @@ class ProductCardWidget extends StatelessWidget {
           children: <Widget>[
             SizedBox(
               width: 200.0,
-              child: AppTextStyle(
+              child: Text(
                 '${product.name}:   ',
-                fontSize: 18.0,
+                style: titleListTextStyle,
               ),
             ),
-            AppTextStyle(
+            Text(
               '  ${product.quantity.toString()} ${product.measure}',
-              color: Colors.black87,
+              style: textStyle,
             ),
           ],
         ),

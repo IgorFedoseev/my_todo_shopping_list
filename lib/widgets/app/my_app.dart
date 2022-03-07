@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/navigation/main_navigation.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list.dart';
+import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
 
 class MyApp extends StatelessWidget {
   static final mainNavigation = MainNavigation();
@@ -8,18 +9,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = ThemeData();
+    final theme = AppTheme.light();
     return MaterialApp(
       title: 'To-do shopping list',
       routes: mainNavigation.route,
       onGenerateRoute: mainNavigation.onGenerateRoute,
-      theme: theme.copyWith(
-        brightness: Brightness.dark,
-        colorScheme: theme.colorScheme.copyWith(
-          primary: Colors.blueGrey,
-          secondary: Colors.blueGrey[700],
-        ),
-      ),
+      theme: theme,
       home: const ProductsListWidget(title: 'Список покупок'),
       // TODO: replace with initial route of main screen
     );
