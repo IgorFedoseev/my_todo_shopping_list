@@ -61,7 +61,7 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
                           });
                         },
                         activeColor: Colors.teal,
-                      )
+                      ),
                     ],
                   ),
                 ),

@@ -21,7 +21,7 @@ class ProductCardWidget extends StatelessWidget {
             SizedBox(
               width: 200.0,
               child: AppTextStyle(
-                '${product.name}: ',
+                '${product.name}:   ',
                 fontSize: 18.0,
               ),
             ),
