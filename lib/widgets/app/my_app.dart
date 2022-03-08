@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/navigation/main_navigation.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/products_list.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/home_page.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
 
 class MyApp extends StatelessWidget {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       routes: mainNavigation.route,
       onGenerateRoute: mainNavigation.onGenerateRoute,
       theme: theme,
-      home: const ProductsListWidget(title: 'Список покупок'),
+      home: const HomePage(),
       // TODO: replace with initial route of main screen
     );
   }

@@ -4,30 +4,30 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   static TextTheme lightTextTheme = TextTheme(
     bodyText1: GoogleFonts.russoOne(
-      fontSize: 14.0,
+      fontSize: 13.0,
       fontWeight: FontWeight.w200,
-      color: Colors.black,
+      color: Colors.blueGrey[900],
     ),
     headline1: GoogleFonts.russoOne(
       fontSize: 32.0,
       fontWeight: FontWeight.w500,
-      color: Colors.black,
+      color: Colors.blueGrey[900],
     ),
     headline2: GoogleFonts.russoOne(
       fontSize: 20.0,
       fontWeight: FontWeight.w400,
-      color: Colors.black,
+      color: Colors.blueGrey[900],
     ),
     headline3: GoogleFonts.russoOne(
       fontSize: 18.0,
       fontWeight: FontWeight.w300,
-      color: Colors.black,
+      color: Colors.blueGrey[900],
     ),
   );
 
   static TextTheme darkTextTheme = TextTheme(
     bodyText1: GoogleFonts.russoOne(
-      fontSize: 14.0,
+      fontSize: 13.0,
       fontWeight: FontWeight.w200,
       color: Colors.white,
     ),
@@ -54,16 +54,23 @@ class AppTheme {
       checkboxTheme: CheckboxThemeData(
         fillColor: MaterialStateColor.resolveWith((states) => Colors.black),
       ),
-      appBarTheme: const AppBarTheme(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
+      appBarTheme: AppBarTheme(
+        foregroundColor: Colors.blueGrey[900],
+        backgroundColor: Colors.blueGrey[50],
+        titleTextStyle: lightTextTheme.headline2,
       ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.blueGrey[800],
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: Colors.green,
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: Colors.blueGrey[50],
+        selectedItemColor: Colors.teal,
+        unselectedItemColor: Colors.blueGrey[400],
+        selectedIconTheme: const IconThemeData(size: 30.0),
+        unselectedIconTheme: const IconThemeData(size: 30.0),
+        selectedLabelStyle: lightTextTheme.bodyText1,
+        unselectedLabelStyle: lightTextTheme.bodyText1,
       ),
       textTheme: lightTextTheme,
     );
@@ -75,13 +82,18 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         foregroundColor: Colors.white,
         backgroundColor: Colors.blueGrey[900],
+        titleTextStyle: darkTextTheme.headline2,
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,
         backgroundColor: Colors.teal,
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedItemColor: Colors.teal,
+        selectedIconTheme: const IconThemeData(size: 30.0),
+        unselectedIconTheme: const IconThemeData(size: 30.0),
+        selectedLabelStyle: darkTextTheme.bodyText1,
+        unselectedLabelStyle: darkTextTheme.bodyText1,
       ),
       textTheme: darkTextTheme,
     );
