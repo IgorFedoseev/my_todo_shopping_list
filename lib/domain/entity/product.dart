@@ -1,21 +1,25 @@
 abstract class Measure {
   static const piece = 'шт.';
-  static const kilo = 'кг.';
-  static const gram = 'гр.';
+  static const kilo = 'кг';
+  static const gram = 'г';
   static const bottles = 'бут.';
-  static const liters = 'л.';
+  static const liters = 'л';
   static const pack = 'уп.';
 } // надо ли переделать на энам?
 
 class Product {
   final String name;
   final int quantity;
-  String measure;
+  final String measure;
+  final bool isTaken;
+  final bool isUrgent;
 
   Product(
       {this.name = 'банан',
       this.quantity = 4,
-      this.measure = Measure.piece});
+      this.measure = Measure.piece,
+      this.isTaken = false,
+      this.isUrgent = true});
 
   static List<Product> examples = [
     Product(

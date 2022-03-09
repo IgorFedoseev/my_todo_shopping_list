@@ -59,9 +59,9 @@ class AppTheme {
         backgroundColor: Colors.blueGrey[50],
         titleTextStyle: lightTextTheme.headline2,
       ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.blueGrey[800],
+        backgroundColor: Colors.teal,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: Colors.blueGrey[50],
