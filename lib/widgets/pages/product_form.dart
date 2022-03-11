@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_to_do_shopping_list/domain/entity/product.dart';
+import 'package:my_to_do_shopping_list/domain/api_client.dart';
+import 'package:my_to_do_shopping_list/domain/entity/product_mock.dart';
 
 class ProductFormWidget extends StatefulWidget {
-  const ProductFormWidget({Key? key, required this.product}) : super(key: key);
-  final Product product;
+  const ProductFormWidget({Key? key, required this.products}) : super(key: key);
+  final ShoppingList products;
 
   @override
   State<ProductFormWidget> createState() => _ProductFormWidgetState();
@@ -11,11 +12,14 @@ class ProductFormWidget extends StatefulWidget {
 
 class _ProductFormWidgetState extends State<ProductFormWidget> {
   late int _sliderValue;
+  late bool _inGram;
 
   @override
   void initState() {
     super.initState();
-    _sliderValue = widget.product.quantity;
+    _inGram = widget.products.measure == 'г';
+    final quantity = widget.products.quantity;
+    _sliderValue = quantity;
   }
 
   @override
@@ -40,7 +44,7 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
                   child: Column(
                     children: [
                       TextFormField(
-                        initialValue: widget.product.name,
+                        initialValue: widget.products.name,
                         autofocus: true,
                         cursorColor: Colors.teal,
                         style: textStyle,
@@ -67,9 +71,9 @@ class _ProductFormWidgetState extends State<ProductFormWidget> {
                       ),
                       const SizedBox(height: 10.0),
                       Slider(
-                        min: 1,
-                        max: 12,
-                        divisions: 11,
+                        min: _inGram ? 100 : 1,
+                        max: _inGram ? 1500 : 15,
+                        divisions: 14,
                         value: _sliderValue.toDouble(),
                         onChanged: (newValue) {
                           setState(() {

@@ -36,7 +36,7 @@
       "id": "5",
       "name": "Сливки",
       "quantity": 200,
-      "measure": "гр",
+      "measure": "г",
       "is_taken": true,
       "is_urgent": false
     },
@@ -84,7 +84,7 @@
       "id": "11",
       "name": "Сливки",
       "quantity": 200,
-      "measure": "гр",
+      "measure": "г",
       "is_taken": true,
       "is_urgent": false
     },
@@ -132,7 +132,7 @@
       "id": "17",
       "name": "Сливки",
       "quantity": 200,
-      "measure": "гр",
+      "measure": "г",
       "is_taken": true,
       "is_urgent": false
     },
