@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:my_to_do_shopping_list/domain/entity/product_mock.dart';
+import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 
 enum ApiClientExceptionType {
   network, // ошибка сети
@@ -12,27 +12,6 @@ enum ApiClientExceptionType {
 class ApiClientException implements Exception {
   final ApiClientExceptionType type;
   ApiClientException(this.type);
-}
-
-enum Measure { piece, kilo, gram, bottles, liters, pack }
-
-extension MeasureAsString on Measure {
-  String asString() {
-    switch (this) {
-      case Measure.piece:
-        return 'шт.';
-      case Measure.kilo:
-        return 'кг';
-      case Measure.gram:
-        return 'г';
-      case Measure.bottles:
-        return 'бут.';
-      case Measure.liters:
-        return 'л';
-      case Measure.pack:
-        return 'уп.';
-    }
-  }
 }
 
 class ApiClient {

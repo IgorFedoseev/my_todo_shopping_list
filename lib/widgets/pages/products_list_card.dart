@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_to_do_shopping_list/domain/entity/product_mock.dart';
+import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 
 class ProductCardWidget extends StatelessWidget {
   const ProductCardWidget(

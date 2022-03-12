@@ -9,7 +9,7 @@ class AppTheme {
       color: Colors.blueGrey[900],
     ),
     headline1: GoogleFonts.russoOne(
-      fontSize: 32.0,
+      fontSize: 24.0,
       fontWeight: FontWeight.w500,
       color: Colors.blueGrey[900],
     ),
@@ -32,7 +32,7 @@ class AppTheme {
       color: Colors.white,
     ),
     headline1: GoogleFonts.russoOne(
-      fontSize: 32.0,
+      fontSize: 24.0,
       fontWeight: FontWeight.w500,
       color: Colors.white,
     ),

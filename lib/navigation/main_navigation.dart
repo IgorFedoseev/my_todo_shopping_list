@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_to_do_shopping_list/domain/entity/product_mock.dart';
+import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/product_create.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/product_form.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list.dart';
