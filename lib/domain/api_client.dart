@@ -47,7 +47,8 @@ class ApiClient {
   }
 
   Future<ProductMock> getProductsList() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 300));
+    // TODO: remove delay simulation
     final json = await _get('assets/json_mock/products_example_mock.json');
     final jsonMap = json as Map<String, dynamic>;
     if (jsonMap["shopping_list"] != null){

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_to_do_shopping_list/domain/api_client.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product_mock.dart';
 
 class ProductFormWidget extends StatefulWidget {
