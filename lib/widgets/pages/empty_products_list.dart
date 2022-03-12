@@ -21,7 +21,7 @@ class EmptyProductsList extends StatelessWidget {
             const SizedBox(height: 35.0),
             Text(
               ' Список пуст',
-              style: Theme.of(context).textTheme.headline2,
+              style: Theme.of(context).textTheme.headline1,
             ),
             const SizedBox(height: 5.0),
             Text(

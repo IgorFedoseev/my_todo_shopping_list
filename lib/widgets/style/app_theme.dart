@@ -9,8 +9,8 @@ class AppTheme {
       color: Colors.blueGrey[900],
     ),
     headline1: GoogleFonts.russoOne(
-      fontSize: 24.0,
-      fontWeight: FontWeight.w500,
+      fontSize: 22.0,
+      fontWeight: FontWeight.w400,
       color: Colors.blueGrey[900],
     ),
     headline2: GoogleFonts.russoOne(
@@ -32,8 +32,8 @@ class AppTheme {
       color: Colors.white,
     ),
     headline1: GoogleFonts.russoOne(
-      fontSize: 24.0,
-      fontWeight: FontWeight.w500,
+      fontSize: 22.0,
+      fontWeight: FontWeight.w400,
       color: Colors.white,
     ),
     headline2: GoogleFonts.russoOne(
