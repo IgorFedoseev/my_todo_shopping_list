@@ -41,14 +41,12 @@ class ShoppingList {
   final int quantity;
   final String measure;
   final bool isTaken;
-  final bool isUrgent;
   ShoppingList({
     required this.id,
     required this.name,
     required this.quantity,
     required this.measure,
     required this.isTaken,
-    required this.isUrgent,
   });
 
   factory ShoppingList.fromJson(Map<String, dynamic> json) =>
@@ -61,7 +59,6 @@ class ShoppingList {
     int? quantity,
     String? measure,
     bool? isTaken,
-    bool? isUrgent,
   }) {
     return ShoppingList(
       id: id ?? this.id,
@@ -69,7 +66,6 @@ class ShoppingList {
       quantity: quantity ?? this.quantity,
       measure: measure ?? this.measure,
       isTaken: isTaken ?? this.isTaken,
-      isUrgent: isUrgent ?? this.isUrgent,
     );
   }
 }

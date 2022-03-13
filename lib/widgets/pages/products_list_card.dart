@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 
 class ProductCardWidget extends StatelessWidget {
-  const ProductCardWidget(
-      this.products,
-      {Key? key,})
-      : super(key: key);
-  final ShoppingList products;
+  final ShoppingList product;
+  //final Function(bool?)? onTaken;
+  final TextDecoration textDecoration;
+
+  ProductCardWidget({
+    Key? key,
+    required this.product,
+    //this.onTaken,
+  })  : textDecoration =
+            product.isTaken ? TextDecoration.lineThrough : TextDecoration.none,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +28,12 @@ class ProductCardWidget extends StatelessWidget {
             SizedBox(
               width: 200.0,
               child: Text(
-                '${products.name}:   ',
+                ' ${product.name}   ',
                 style: titleListTextStyle,
               ),
             ),
             Text(
-              '  ${products.quantity.toString()} ${products.measure}',
+              '  ${product.quantity.toString()} ${product.measure}',
               style: textStyle,
             ),
           ],

@@ -23,7 +23,6 @@ ShoppingList _$ShoppingListFromJson(Map<String, dynamic> json) => ShoppingList(
       quantity: json['quantity'] as int,
       measure: json['measure'] as String,
       isTaken: json['is_taken'] as bool,
-      isUrgent: json['is_urgent'] as bool,
     );
 
 Map<String, dynamic> _$ShoppingListToJson(ShoppingList instance) =>
@@ -33,5 +32,4 @@ Map<String, dynamic> _$ShoppingListToJson(ShoppingList instance) =>
       'quantity': instance.quantity,
       'measure': instance.measure,
       'is_taken': instance.isTaken,
-      'is_urgent': instance.isUrgent,
     };

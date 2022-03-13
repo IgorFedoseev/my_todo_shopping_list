@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/products_list_card.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
 
 class ProductCreateEditWidget extends StatefulWidget {
@@ -26,7 +27,6 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
   String _name = '';
   String _measure = Measure.piece.asString();
   int _quantity = 1;
-  bool _importance = true;
   late bool _inGram;
 
   @override
@@ -38,7 +38,6 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
       _name = originalProduct.name;
       _measure = originalProduct.measure;
       _quantity = originalProduct.quantity;
-      _importance = originalProduct.isUrgent;
     }
     _inGram = originalProduct?.measure == 'г';
 
@@ -57,6 +56,16 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+    //TODO: remove later
+    final mockProduct = ShoppingList(
+      id: '1001',
+      name: _name,
+      measure: _measure,
+      quantity: _quantity,
+      isTaken: false,
+    );
+
     final originalProduct = widget.originalProduct;
     final textStyle = Theme.of(context).textTheme.headline3;
     return Scaffold(
@@ -66,45 +75,51 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
             : const Text('Редактировать'),
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 35.0),
-            child: Card(
-              elevation: 3.0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0)),
+        child: Column(
+          children: [
+            Center(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    buildNameTextFormField(textStyle),
-                    const SizedBox(height: 10.0),
-                    buildMeasureOptions(),
-                    const SizedBox(height: 10.0),
-                    Text(
-                      '$_quantity $_measure',
-                      style: textStyle,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 35.0),
+                child: Card(
+                  elevation: 3.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 30.0),
+                        buildNameTextFormField(textStyle),
+                        const SizedBox(height: 10.0),
+                        buildMeasureOptions(),
+                        const SizedBox(height: 10.0),
+                        Text(
+                          '$_quantity $_measure',
+                          style: textStyle,
+                        ),
+                        const SizedBox(height: 6.0),
+                        Slider(
+                          min: _inGram ? 100 : 1,
+                          max: _inGram ? 1500 : 15,
+                          divisions: 14,
+                          value: _quantity.toDouble(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              _quantity = newValue.round();
+                            });
+                          },
+                          activeColor: Colors.teal,
+                          inactiveColor: Colors.teal[100],
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 6.0),
-                    Slider(
-                      min: _inGram ? 100 : 1,
-                      max: _inGram ? 1500 : 15,
-                      divisions: 14,
-                      value: _quantity.toDouble(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _quantity = newValue.round();
-                        });
-                      },
-                      activeColor: Colors.teal,
-                      inactiveColor: Colors.teal[100],
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
+            ProductCardWidget(product: originalProduct ?? mockProduct),
+          ],
         ),
       ),
     );
@@ -168,12 +183,15 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
       onSelected: (selected){
         setState(() {
           _measure = measure;
-          if (measure == 'г') {
+          final isInGram = _inGram;
+          if (measure == Measure.gram.asString()) {
             _inGram = true;
-            _quantity = 100;
+            if (isInGram == _inGram) return;
+            _quantity *= 100;
           } else {
             _inGram = false;
-            _quantity = 1;
+            if (isInGram == _inGram) return;
+            _quantity ~/= 100;
           }
         });
       },
