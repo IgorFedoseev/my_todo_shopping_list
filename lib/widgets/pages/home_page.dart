@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TabManager>(builder: (context, tabManager, child) {
+    return Consumer<TabManager>(builder: (context, tabManager, _) {
       return Scaffold(
         body: pages[tabManager.selectedTab],
         bottomNavigationBar: BottomNavigationBar(
