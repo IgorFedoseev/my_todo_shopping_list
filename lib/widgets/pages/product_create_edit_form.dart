@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list_card.dart';
+import 'package:my_to_do_shopping_list/widgets/style/app_action_buttons.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductCreateEditWidget extends StatefulWidget {
   final Function(ShoppingList) onCreate;
@@ -56,21 +58,20 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
 
   @override
   Widget build(BuildContext context) {
-
-    //TODO: remove later
-    final mockProduct = ShoppingList(
-      id: '1001',
+    final completedProduct = ShoppingList(
+      id: widget.originalProduct?.id ?? const Uuid().v1(),
       name: _name,
       measure: _measure,
       quantity: _quantity,
-      isTaken: false,
+      isTaken: widget.originalProduct?.isTaken ?? false,
     );
 
-    final originalProduct = widget.originalProduct;
-    final textStyle = Theme.of(context).textTheme.headline3;
+    final _originalProduct = widget.originalProduct;
+    final _textFieldTextStyle = Theme.of(context).textTheme.headline3;
+
     return Scaffold(
       appBar: AppBar(
-        title: originalProduct == null
+        title: _originalProduct == null
             ? const Text('Добавить в список')
             : const Text('Редактировать'),
       ),
@@ -79,8 +80,8 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
           children: [
             Center(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 35.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0, vertical: 35.0),
                 child: Card(
                   elevation: 3.0,
                   shape: RoundedRectangleBorder(
@@ -90,38 +91,43 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
                     child: Column(
                       children: [
                         const SizedBox(height: 30.0),
-                        buildNameTextFormField(textStyle),
+                        buildNameTextFormField(_textFieldTextStyle),
                         const SizedBox(height: 10.0),
                         buildMeasureOptions(),
                         const SizedBox(height: 10.0),
                         Text(
                           '$_quantity $_measure',
-                          style: textStyle,
+                          style: _textFieldTextStyle,
                         ),
-                        const SizedBox(height: 6.0),
-                        Slider(
-                          min: _inGram ? 100 : 1,
-                          max: _inGram ? 1500 : 15,
-                          divisions: 14,
-                          value: _quantity.toDouble(),
-                          onChanged: (newValue) {
-                            setState(() {
-                              _quantity = newValue.round();
-                            });
-                          },
-                          activeColor: Colors.teal,
-                          inactiveColor: Colors.teal[100],
-                        ),
+                        buildSlider(),
+                        const SizedBox(height: 12.0),
+                        const AppActionButtons(),
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-            ProductCardWidget(product: originalProduct ?? mockProduct),
+            ProductCardWidget(product: _originalProduct ?? completedProduct),
           ],
         ),
       ),
+    );
+  }
+
+  Slider buildSlider() {
+    return Slider(
+      min: _inGram ? 100 : 1,
+      max: _inGram ? 1500 : 15,
+      divisions: 14,
+      value: _quantity.toDouble(),
+      onChanged: (newValue) {
+        setState(() {
+          _quantity = newValue.round();
+        });
+      },
+      activeColor: Colors.teal,
+      inactiveColor: Colors.teal[100],
     );
   }
 
@@ -180,7 +186,7 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
       selected: _measure == measure,
       selectedColor: Colors.teal,
       backgroundColor: Colors.blueGrey[300],
-      onSelected: (selected){
+      onSelected: (selected) {
         setState(() {
           _measure = measure;
           final isInGram = _inGram;
@@ -197,5 +203,4 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
       },
     );
   }
-
 }

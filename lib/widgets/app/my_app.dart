@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = AppTheme.light();
+    final theme = AppTheme.dark();
     return MaterialApp(
       title: 'To-do shopping list',
       // routes: mainNavigation.route,

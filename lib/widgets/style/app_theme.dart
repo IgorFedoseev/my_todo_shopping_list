@@ -10,12 +10,12 @@ class AppTheme {
     ),
     headline1: GoogleFonts.russoOne(
       fontSize: 22.0,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w300,
       color: Colors.blueGrey[900],
     ),
     headline2: GoogleFonts.russoOne(
       fontSize: 20.0,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w300,
       color: Colors.blueGrey[900],
     ),
     headline3: GoogleFonts.russoOne(
@@ -33,12 +33,12 @@ class AppTheme {
     ),
     headline1: GoogleFonts.russoOne(
       fontSize: 22.0,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w300,
       color: Colors.white,
     ),
     headline2: GoogleFonts.russoOne(
       fontSize: 20.0,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w300,
       color: Colors.white,
     ),
     headline3: GoogleFonts.russoOne(
