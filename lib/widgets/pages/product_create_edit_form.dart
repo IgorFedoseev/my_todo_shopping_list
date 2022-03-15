@@ -58,16 +58,9 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final completedProduct = ShoppingList(
-      id: widget.originalProduct?.id ?? const Uuid().v1(),
-      name: _name,
-      measure: _measure,
-      quantity: _quantity,
-      isTaken: widget.originalProduct?.isTaken ?? false,
-    );
-
     final _originalProduct = widget.originalProduct;
-    final _textFieldTextStyle = Theme.of(context).textTheme.headline3;
+    final _textFieldTextStyle = Theme.of(context).textTheme.headline2;
+    final _quantityTextStyle = Theme.of(context).textTheme.headline3;
 
     return Scaffold(
       appBar: AppBar(
@@ -81,7 +74,7 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
             Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 12.0, vertical: 35.0),
+                    horizontal: 12.0, vertical: 42.0),
                 child: Card(
                   elevation: 3.0,
                   shape: RoundedRectangleBorder(
@@ -90,18 +83,23 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        const SizedBox(height: 30.0),
+                        const SizedBox(height: 18.0),
                         buildNameTextFormField(_textFieldTextStyle),
-                        const SizedBox(height: 10.0),
+                        const SizedBox(height: 16.0),
                         buildMeasureOptions(),
                         const SizedBox(height: 10.0),
                         Text(
                           '$_quantity $_measure',
-                          style: _textFieldTextStyle,
+                          style: _quantityTextStyle,
                         ),
+                        const SizedBox(height: 6.0),
                         buildSlider(),
                         const SizedBox(height: 12.0),
-                        const AppActionButtons(),
+                        AppActionButtons(
+                          resumeAddition: () {},
+                          completeAddition: completeAdding,
+                        ),
+                        const SizedBox(height: 12.0),
                       ],
                     ),
                   ),
@@ -115,20 +113,20 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
     );
   }
 
-  Slider buildSlider() {
-    return Slider(
-      min: _inGram ? 100 : 1,
-      max: _inGram ? 1500 : 15,
-      divisions: 14,
-      value: _quantity.toDouble(),
-      onChanged: (newValue) {
-        setState(() {
-          _quantity = newValue.round();
-        });
-      },
-      activeColor: Colors.teal,
-      inactiveColor: Colors.teal[100],
-    );
+  ShoppingList get completedProduct => ShoppingList(
+    id: widget.originalProduct?.id ?? const Uuid().v1(),
+    name: _name,
+    measure: _measure,
+    quantity: _quantity,
+    isTaken: widget.originalProduct?.isTaken ?? false,
+  );
+
+  void completeAdding(){
+    if(widget.isUpdating){
+      widget.onEdit(completedProduct);
+    } else {
+      widget.onCreate(completedProduct);
+    }
   }
 
   TextFormField buildNameTextFormField(TextStyle? textStyle) {
@@ -139,6 +137,8 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
       style: textStyle,
       textAlign: TextAlign.center,
       decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
+        isCollapsed: true,
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             color: Colors.teal,
@@ -201,6 +201,22 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
           }
         });
       },
+    );
+  }
+
+  Slider buildSlider() {
+    return Slider(
+      min: _inGram ? 100 : 1,
+      max: _inGram ? 1500 : 15,
+      divisions: 14,
+      value: _quantity.toDouble(),
+      onChanged: (newValue) {
+        setState(() {
+          _quantity = newValue.round();
+        });
+      },
+      activeColor: Colors.teal,
+      inactiveColor: Colors.teal[100],
     );
   }
 }
