@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list_card.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/products_list_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_action_buttons.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
+import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductCreateEditWidget extends StatefulWidget {
@@ -96,7 +98,7 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
                         buildSlider(),
                         const SizedBox(height: 12.0),
                         AppActionButtons(
-                          resumeAddition: () {},
+                          resumeAddition: resumeAdding,
                           completeAddition: completeAdding,
                         ),
                         const SizedBox(height: 12.0),
@@ -114,18 +116,29 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
   }
 
   ShoppingList get completedProduct => ShoppingList(
-    id: widget.originalProduct?.id ?? const Uuid().v1(),
-    name: _name,
-    measure: _measure,
-    quantity: _quantity,
-    isTaken: widget.originalProduct?.isTaken ?? false,
-  );
+        id: widget.originalProduct?.id ?? const Uuid().v1(),
+        name: _name,
+        measure: _measure,
+        quantity: _quantity,
+        isTaken: widget.originalProduct?.isTaken ?? false,
+      );
 
-  void completeAdding(){
-    if(widget.isUpdating){
+  void completeAdding() {
+    if (widget.isUpdating) {
       widget.onEdit(completedProduct);
+      Navigator.pop(context);
     } else {
       widget.onCreate(completedProduct);
+      Navigator.pop(context);
+    }
+  }
+
+  void resumeAdding() {
+    if (widget.isUpdating) {
+
+    } else {
+      widget.onCreate(completedProduct);
+      Navigator.pop(context);
     }
   }
 

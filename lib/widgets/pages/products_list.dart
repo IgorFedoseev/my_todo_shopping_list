@@ -26,7 +26,6 @@ class ProductsListWidget extends StatelessWidget {
               builder: (context) => ProductCreateEditWidget(
                 onCreate: (ShoppingList product){
                   manager.addProduct(product);
-                  Navigator.pop(context);
                 },
                 onEdit: (ShoppingList product){},
               ),
