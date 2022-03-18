@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list_card.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/products_list_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_action_buttons.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
-import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductCreateEditWidget extends StatefulWidget {
@@ -98,7 +96,7 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
                         buildSlider(),
                         const SizedBox(height: 12.0),
                         AppActionButtons(
-                          resumeAddition: resumeAdding,
+                          resumeAddition: () => resumeAdding(),
                           completeAddition: completeAdding,
                         ),
                         const SizedBox(height: 12.0),
@@ -128,17 +126,26 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
       widget.onEdit(completedProduct);
       Navigator.pop(context);
     } else {
-      widget.onCreate(completedProduct);
+      if(_name.trim().isNotEmpty) {
+        widget.onCreate(completedProduct);
+      }
       Navigator.pop(context);
     }
   }
 
   void resumeAdding() {
     if (widget.isUpdating) {
-
-    } else {
       widget.onCreate(completedProduct);
       Navigator.pop(context);
+    } else {
+      if(_name.trim().isEmpty) return;
+      widget.onCreate(completedProduct);
+      setState(() {
+        _nameController.clear();
+        _measure = Measure.piece.asString();
+        _quantity = 1;
+        _inGram = false;
+      });
     }
   }
 
