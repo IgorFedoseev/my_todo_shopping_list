@@ -96,7 +96,8 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
                         buildSlider(),
                         const SizedBox(height: 12.0),
                         AppActionButtons(
-                          resumeAddition: () => resumeAdding(),
+                          isEditing: widget.isUpdating,
+                          resumeAddition: resumeAdding,
                           completeAddition: completeAdding,
                         ),
                         const SizedBox(height: 12.0),
@@ -135,7 +136,6 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
 
   void resumeAdding() {
     if (widget.isUpdating) {
-      widget.onCreate(completedProduct);
       Navigator.pop(context);
     } else {
       if(_name.trim().isEmpty) return;

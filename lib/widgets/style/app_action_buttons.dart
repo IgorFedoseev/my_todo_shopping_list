@@ -4,15 +4,19 @@ import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
 class AppActionButtons extends StatelessWidget {
   final void Function() completeAddition;
   final void Function() resumeAddition;
-  const AppActionButtons(
-      {Key? key, required this.resumeAddition, required this.completeAddition})
-      : super(key: key);
+  final bool isEditing;
+  const AppActionButtons({
+    Key? key,
+    required this.resumeAddition,
+    required this.completeAddition,
+    required this.isEditing,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        buildButton('Добавить', resumeAddition),
+        buildButton(isEditing ? 'Отмена' : 'Добавить', resumeAddition),
         const SizedBox(width: 14),
         buildButton('Готово', completeAddition),
       ],

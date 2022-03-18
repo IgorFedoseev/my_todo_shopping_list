@@ -17,21 +17,7 @@ class ProductsListWidget extends StatelessWidget {
         title: Text(title),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          final manager =
-              Provider.of<ProductListManager>(context, listen: false);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProductCreateEditWidget(
-                onCreate: (ShoppingList product){
-                  manager.addProduct(product);
-                },
-                onEdit: (ShoppingList product){},
-              ),
-            ),
-          );
-        },
+        onPressed: () => _tapOnAddButton(context),
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
@@ -49,6 +35,22 @@ class ProductsListWidget extends StatelessWidget {
           return const EmptyProductsList();
         }
       },
+    );
+  }
+
+  void _tapOnAddButton(BuildContext context){
+    final manager =
+    Provider.of<ProductListManager>(context, listen: false);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProductCreateEditWidget(
+          onCreate: (ShoppingList product){
+            manager.addProduct(product);
+          },
+          onEdit: (ShoppingList product){},
+        ),
+      ),
     );
   }
 }

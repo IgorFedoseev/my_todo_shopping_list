@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<TabManager>(builder: (context, tabManager, _) {
       return Scaffold(
-        body: pages[tabManager.selectedTab],
+        body: IndexedStack(index: tabManager.selectedTab, children: pages),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: tabManager.selectedTab,
           onTap: (index) => tabManager.goToTab(index),
