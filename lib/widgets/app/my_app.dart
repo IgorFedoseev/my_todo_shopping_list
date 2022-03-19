@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:my_to_do_shopping_list/navigation/tab_manager.dart';
+import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/home_page.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
 import 'package:provider/provider.dart';
 
-class MyApp extends StatelessWidget {
-  // static final mainNavigation = MainNavigation();
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final _appStateManager = AppStateManager();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: theme,
       home: MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => TabManager()),
+          ChangeNotifierProvider(create: (context) => _appStateManager),
           ChangeNotifierProvider(create: (context) => ProductListManager()),
         ],
         child: const HomePage(),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_to_do_shopping_list/navigation/tab_manager.dart';
+import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list.dart';
 import 'package:provider/provider.dart';
 
@@ -9,12 +9,12 @@ class HomePage extends StatelessWidget {
   static List<Widget> pages = [
     const ProductsListWidget(title: 'Список покупок'),
     const Center(child: Text('Список дел')),
-    const Center(child: Text('Profile')),
+    const Center(child: Text('Настройки')),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TabManager>(builder: (context, tabManager, _) {
+    return Consumer<AppStateManager>(builder: (context, tabManager, _) {
       return Scaffold(
         body: IndexedStack(index: tabManager.selectedTab, children: pages),
         bottomNavigationBar: BottomNavigationBar(
@@ -30,13 +30,12 @@ class HomePage extends StatelessWidget {
               label: 'Дела',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Профиль',
+              icon: Icon(Icons.settings),
+              label: 'Настройки',
             ),
           ],
         ),
       );
-    }
-    );
+    });
   }
 }
