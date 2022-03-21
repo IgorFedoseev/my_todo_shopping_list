@@ -8,6 +8,11 @@ class AppTheme {
       fontWeight: FontWeight.w200,
       color: Colors.blueGrey[900],
     ),
+    bodyText2: GoogleFonts.russoOne(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w200,
+      color: Colors.blueGrey[900],
+    ),
     headline1: GoogleFonts.russoOne(
       fontSize: 22.0,
       fontWeight: FontWeight.w300,
@@ -28,6 +33,11 @@ class AppTheme {
   static TextTheme darkTextTheme = TextTheme(
     bodyText1: GoogleFonts.russoOne(
       fontSize: 13.0,
+      fontWeight: FontWeight.w200,
+      color: Colors.white,
+    ),
+    bodyText2: GoogleFonts.russoOne(
+      fontSize: 16.0,
       fontWeight: FontWeight.w200,
       color: Colors.white,
     ),
