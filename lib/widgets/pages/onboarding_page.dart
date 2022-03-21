@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/app_images.dart';
-import 'package:my_to_do_shopping_list/navigation/app_pages.dart';
+import 'package:my_to_do_shopping_list/navigation/app_page_paths.dart';
 import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -105,10 +105,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   }
 
   Widget _pageIndicator() {
+    final unusedDotsColor = Colors.blueGrey[300] ?? Colors.blueGrey;
     return SmoothPageIndicator(
       controller: _pageController,
       count: 4,
-      effect: const WormEffect(
+      effect: WormEffect(
+        dotColor: unusedDotsColor,
         activeDotColor: Colors.teal,
         dotWidth: 14,
         dotHeight: 14,

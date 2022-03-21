@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/home_page.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/onboarding_page.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list_manager.dart';
 
@@ -32,7 +33,9 @@ class AppRouter extends RouterDelegate
       key: navigatorKey,
       onPopPage: _handlePopPage,
       pages: [
-        if(!appStateManager.isOnBoardingComplete) OnBoardingPage.page(),
+        if (!appStateManager.isOnBoardingComplete) OnBoardingPage.page(),
+        if (appStateManager.isOnBoardingComplete)
+          HomePage.page(appStateManager.getSelectedTab),
       ],
     );
   }

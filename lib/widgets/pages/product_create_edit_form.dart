@@ -6,6 +6,7 @@ import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductCreateEditWidget extends StatefulWidget {
+
   final Function(ShoppingList) onCreate;
   final Function(ShoppingList) onEdit;
   final ShoppingList? originalProduct;
