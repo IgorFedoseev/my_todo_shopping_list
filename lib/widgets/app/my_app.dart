@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_to_do_shopping_list/navigation/app_router.dart';
 import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/home_page.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list_manager.dart';
@@ -14,6 +15,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _appStateManager = AppStateManager();
+  final _productListManager = ProductListManager();
+  late AppRouter _appRouter;
+
+  @override
+  void initState() {
+    super.initState();
+    _appRouter = AppRouter(
+      appStateManager: _appStateManager,
+      productListManager: _productListManager,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +38,10 @@ class _MyAppState extends State<MyApp> {
       home: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => _appStateManager),
-          ChangeNotifierProvider(create: (context) => ProductListManager()),
+          ChangeNotifierProvider(create: (context) => _productListManager),
         ],
         child: const HomePage(),
       ),
-      // TODO: replace with initial route of main screen
     );
   }
 }

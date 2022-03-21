@@ -10,8 +10,8 @@ class AppStateManager extends ChangeNotifier{
   bool _onBoardingComplete = false;
   int _selectedTab = AppTab.shoppingList;
 
-  bool get onBoardingComplete => _onBoardingComplete;
-  int get selectedTab => _selectedTab;
+  bool get isOnBoardingComplete => _onBoardingComplete;
+  int get getSelectedTab => _selectedTab;
 
   void completeOnBoarding(){
     _onBoardingComplete = true;

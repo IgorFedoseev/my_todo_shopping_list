@@ -1,19 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/products_list_manager.dart';
 
 class AppRouter extends RouterDelegate
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   @override
+  final GlobalKey<NavigatorState> navigatorKey;
+  final ProductListManager productListManager;
+  final AppStateManager appStateManager;
+  // TODO: add profileManager
+
+  AppRouter({
+    required this.productListManager,
+    required this.appStateManager,
+  }) : navigatorKey = GlobalKey<NavigatorState>() {
+    productListManager.addListener(notifyListeners);
+    appStateManager.addListener(notifyListeners);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    productListManager.removeListener(notifyListeners);
+    appStateManager.removeListener(notifyListeners);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Navigator(
+      key: navigatorKey,
+      onPopPage: _handlePopPage,
+      pages: [],
+    );
+  }
+
+  bool _handlePopPage(Route<dynamic> route, result) {
+    if (!route.didPop(result)) {
+      return false;
+    }
+    return true;
   }
 
   @override
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey(); // remove impl
-
-  @override
-  Future<void> setNewRoutePath(configuration) {
-    // TODO: implement setNewRoutePath
-    throw UnimplementedError();
-  }
+  Future<void> setNewRoutePath(configuration) async {} // => null;
 }
