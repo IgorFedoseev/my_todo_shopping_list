@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/settings_manager.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -14,7 +16,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final headerTextStyle = Theme.of(context).textTheme.headline2;
     final menuTextStyle = Theme.of(context).textTheme.headline3;
     final textShowOnBoardStyle = menuTextStyle?.copyWith(color: Colors.teal);
     final textButtonStyle = menuTextStyle?.copyWith(
@@ -32,11 +33,11 @@ class _SettingsPageState extends State<SettingsPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 50),
-              headerTextWidget('Тема приложения', headerTextStyle),
+              headerTextWidget('Тема приложения'),
               const SizedBox(height: 6),
               darkMode(menuTextStyle),
               const SizedBox(height: 16),
-              headerTextWidget('Цвет уровня важности дела', headerTextStyle),
+              headerTextWidget('Цвет уровня важности дела'),
               const SizedBox(height: 6),
               colorPicker(
                 color: _highCurrentColor,
@@ -57,7 +58,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 textButtonStyle: textButtonStyle,
               ),
               const SizedBox(height: 16),
-              headerTextWidget('Справка', headerTextStyle),
+              headerTextWidget('Справка'),
               const SizedBox(height: 6),
               showOnBoardingPage(textShowOnBoardStyle),
             ],
@@ -67,23 +68,32 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget headerTextWidget(String text, TextStyle? style) {
+  Widget headerTextWidget(String text) {
+    final headerTextStyle = Theme.of(context).textTheme.headline2;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: Text(
         text,
-        style: style,
+        style: headerTextStyle,
       ),
     );
   }
 
   Widget darkMode(TextStyle? style) {
+    final darkModeValue =
+        Provider.of<SettingsManager>(context, listen: false).darkMode;
     return settingsCardBuilder(
-        text: Text(
-          'Тёмная тема',
-          style: style,
-        ),
-        selectWidget: Switch(value: false, onChanged: (value) {}));
+      text: Text(
+        'Тёмная тема',
+        style: style,
+      ),
+      selectWidget: Switch(
+        value: darkModeValue,
+        onChanged: (value) {
+          Provider.of<SettingsManager>(context, listen: false).darkMode = value;
+        },
+      ),
+    );
   }
 
   Widget colorPicker(

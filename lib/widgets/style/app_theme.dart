@@ -60,13 +60,14 @@ class AppTheme {
 
   static ThemeData light() {
     return ThemeData(
+      scaffoldBackgroundColor: Colors.blueGrey[50],
       brightness: Brightness.light,
       checkboxTheme: CheckboxThemeData(
         fillColor: MaterialStateColor.resolveWith((states) => Colors.black),
       ),
       appBarTheme: AppBarTheme(
         foregroundColor: Colors.blueGrey[900],
-        backgroundColor: Colors.blueGrey[50],
+        backgroundColor: Colors.white,
         titleTextStyle: lightTextTheme.headline2,
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -74,7 +75,7 @@ class AppTheme {
         backgroundColor: Colors.teal,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Colors.blueGrey[50],
+        backgroundColor: Colors.white,
         selectedItemColor: Colors.teal,
         unselectedItemColor: Colors.blueGrey[400],
         selectedIconTheme: const IconThemeData(size: 30.0),

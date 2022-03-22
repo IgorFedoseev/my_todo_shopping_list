@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/navigation/app_router.dart';
 import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list_manager.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/settings_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final _appStateManager = AppStateManager();
   final _productListManager = ProductListManager();
+  final _settingsManager = SettingsManager();
   late AppRouter _appRouter;
 
   @override
@@ -28,18 +30,28 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = AppTheme.dark();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => _appStateManager),
         ChangeNotifierProvider(create: (context) => _productListManager),
+        ChangeNotifierProvider(create: (context) => _settingsManager),
       ],
-      child: MaterialApp(
-        title: 'To-do shopping list',
-        theme: theme,
-        home: Router(
-          routerDelegate: _appRouter,
-        ),
+      child: Consumer<SettingsManager>(
+        builder: (context, settingsManager, _) {
+          ThemeData theme;
+          if (settingsManager.darkMode) {
+            theme = AppTheme.dark();
+          } else {
+            theme = AppTheme.light();
+          }
+          return MaterialApp(
+            title: 'To-do shopping list',
+            theme: theme,
+            home: Router(
+              routerDelegate: _appRouter,
+            ),
+          );
+        },
       ),
     );
   }
