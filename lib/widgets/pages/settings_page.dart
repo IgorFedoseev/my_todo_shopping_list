@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/settings_manager.dart';
 import 'package:provider/provider.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
-  Color _highCurrentColor = Colors.red;
-  Color _mediumCurrentColor = Colors.yellow;
-  Color _lowCurrentColor = Colors.green;
-
-  @override
   Widget build(BuildContext context) {
+    final manager = Provider.of<SettingsManager>(context, listen: true);
     final menuTextStyle = Theme.of(context).textTheme.headline3;
     final textShowOnBoardStyle = menuTextStyle?.copyWith(color: Colors.teal);
     final textButtonStyle = menuTextStyle?.copyWith(
@@ -33,32 +26,38 @@ class _SettingsPageState extends State<SettingsPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 50),
-              headerTextWidget('Тема приложения'),
+              headerTextWidget('Тема приложения', context),
               const SizedBox(height: 6),
-              darkMode(menuTextStyle),
+              darkMode(menuTextStyle, manager),
               const SizedBox(height: 16),
-              headerTextWidget('Цвет уровня важности дела'),
+              headerTextWidget('Цвет уровня важности дела', context),
               const SizedBox(height: 6),
               colorPicker(
-                color: _highCurrentColor,
+                context,
+                color: manager.highCurrentColor,
                 text: 'Высокий',
                 labelStyle: menuTextStyle,
                 textButtonStyle: textButtonStyle,
+                changeColor: (color) => manager.highCurrentColor = color,
               ),
               colorPicker(
-                color: _mediumCurrentColor,
+                context,
+                color: manager.mediumCurrentColor,
                 text: 'Средний',
                 labelStyle: menuTextStyle,
                 textButtonStyle: textButtonStyle,
+                changeColor: (color) => manager.mediumCurrentColor = color,
               ),
               colorPicker(
-                color: _lowCurrentColor,
+                context,
+                color: manager.lowCurrentColor,
                 text: 'Низкий',
                 labelStyle: menuTextStyle,
                 textButtonStyle: textButtonStyle,
+                changeColor: (color) => manager.lowCurrentColor = color,
               ),
               const SizedBox(height: 16),
-              headerTextWidget('Справка'),
+              headerTextWidget('Справка', context),
               const SizedBox(height: 6),
               showOnBoardingPage(textShowOnBoardStyle),
             ],
@@ -68,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget headerTextWidget(String text) {
+  Widget headerTextWidget(String text, BuildContext context) {
     final headerTextStyle = Theme.of(context).textTheme.headline2;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -79,9 +78,8 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget darkMode(TextStyle? style) {
-    final darkModeValue =
-        Provider.of<SettingsManager>(context, listen: false).darkMode;
+  Widget darkMode(TextStyle? style, SettingsManager manager) {
+    final darkModeValue = manager.darkMode;
     return settingsCardBuilder(
       text: Text(
         'Тёмная тема',
@@ -89,27 +87,50 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       selectWidget: Switch(
         value: darkModeValue,
-        onChanged: (value) {
-          Provider.of<SettingsManager>(context, listen: false).darkMode = value;
-        },
+        onChanged: (value) => manager.darkMode = value,
       ),
     );
   }
 
   Widget colorPicker(
-      {required Color color,
-      required String text,
-      required TextStyle? labelStyle,
-      required TextStyle? textButtonStyle}) {
+    BuildContext context, {
+    required Color color,
+    required String text,
+    required TextStyle? labelStyle,
+    required TextStyle? textButtonStyle,
+    required void Function(Color) changeColor,
+  }) {
     return settingsCardBuilder(
       coloredBox: SizedBox(height: 38, child: ColoredBox(color: color)),
       text: Text(text, style: labelStyle),
       selectWidget: TextButton(
-        onPressed: () {},
         child: Text(
           'выбрать',
           style: textButtonStyle,
         ),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: BlockPicker(
+                    pickerColor: Colors.white,
+                    onColorChanged: changeColor,
+                  ),
+                  actions: [
+                    TextButton(
+                      child: Text(
+                        'Сохранить',
+                        style: textButtonStyle,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                );
+              });
+        },
       ),
     );
   }
