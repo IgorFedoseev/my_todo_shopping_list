@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/home_page.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/onboarding_page.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/products_list_manager.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/home_page/home_page.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/on_boarding_page/onboarding_page.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_manager.dart';
 
 class AppRouter extends RouterDelegate
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/product_create_edit_form.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/products_list_card.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/products_list_manager.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/product_create_edit_form.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_card.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_manager.dart';
 
 class ProductsListBuilder extends StatelessWidget {
   final ProductListManager manager;

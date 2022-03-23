@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/products_list_card.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_card.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_action_buttons.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
 import 'package:uuid/uuid.dart';
