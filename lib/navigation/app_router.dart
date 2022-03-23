@@ -10,7 +10,6 @@ class AppRouter extends RouterDelegate
   final GlobalKey<NavigatorState> navigatorKey;
   final ProductListManager productListManager;
   final AppStateManager appStateManager;
-  // TODO: add profileManager
 
   AppRouter({
     required this.productListManager,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/empty_products_list.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/products_empty_list.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/product_create_edit_form.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list_builder.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/products_list_manager.dart';
@@ -32,7 +32,7 @@ class ProductsListWidget extends StatelessWidget {
         if (productListManager.products.isNotEmpty) {
           return ProductsListBuilder(manager: productListManager);
         } else {
-          return const EmptyProductsList();
+          return const ProductsEmptyList();
         }
       },
     );

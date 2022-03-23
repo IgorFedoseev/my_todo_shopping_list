@@ -24,9 +24,8 @@ class AppStateManager extends ChangeNotifier{
     notifyListeners();
   }
 
-  void logOut(){
+  void showOnBoardingScreen(){
     _onBoardingComplete = false;
-    _selectedTab = AppTab.shoppingList;
     notifyListeners();
   }
 }

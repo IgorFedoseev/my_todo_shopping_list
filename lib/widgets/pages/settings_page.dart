@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/settings_manager.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +9,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final manager = Provider.of<SettingsManager>(context, listen: true);
+    final manager = context.read<SettingsManager>();
+    final setManager = context.watch<SettingsManager>();
     final menuTextStyle = Theme.of(context).textTheme.headline3;
     final textShowOnBoardStyle = menuTextStyle?.copyWith(color: Colors.teal);
     final textButtonStyle = menuTextStyle?.copyWith(
@@ -25,7 +27,7 @@ class SettingsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 66),
               headerTextWidget('Тема приложения', context),
               const SizedBox(height: 6),
               darkMode(menuTextStyle, manager),
@@ -38,7 +40,7 @@ class SettingsPage extends StatelessWidget {
                 text: 'Высокий',
                 labelStyle: menuTextStyle,
                 textButtonStyle: textButtonStyle,
-                changeColor: (color) => manager.highCurrentColor = color,
+                changeColor: (color) => setManager.highCurrentColor = color,
               ),
               colorPicker(
                 context,
@@ -46,7 +48,7 @@ class SettingsPage extends StatelessWidget {
                 text: 'Средний',
                 labelStyle: menuTextStyle,
                 textButtonStyle: textButtonStyle,
-                changeColor: (color) => manager.mediumCurrentColor = color,
+                changeColor: (color) => setManager.mediumCurrentColor = color,
               ),
               colorPicker(
                 context,
@@ -54,12 +56,12 @@ class SettingsPage extends StatelessWidget {
                 text: 'Низкий',
                 labelStyle: menuTextStyle,
                 textButtonStyle: textButtonStyle,
-                changeColor: (color) => manager.lowCurrentColor = color,
+                changeColor: (color) => setManager.lowCurrentColor = color,
               ),
               const SizedBox(height: 16),
               headerTextWidget('Справка', context),
               const SizedBox(height: 6),
-              showOnBoardingPage(textShowOnBoardStyle),
+              showOnBoardingPage(textShowOnBoardStyle, context),
             ],
           ),
         ),
@@ -113,10 +115,14 @@ class SettingsPage extends StatelessWidget {
               context: context,
               builder: (context) {
                 return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
                   content: BlockPicker(
-                    pickerColor: Colors.white,
+                    pickerColor: color,
                     onColorChanged: changeColor,
                   ),
+                  actionsAlignment: MainAxisAlignment.center,
                   actions: [
                     TextButton(
                       child: Text(
@@ -135,11 +141,12 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  Widget showOnBoardingPage(TextStyle? style) {
+  Widget showOnBoardingPage(TextStyle? style, BuildContext context) {
     return settingsCardBuilder(
       text: SizedBox(
         child: TextButton(
-          onPressed: () {},
+          onPressed: Provider.of<AppStateManager>(context, listen: false)
+              .showOnBoardingScreen,
           style: ButtonStyle(
             padding: MaterialStateProperty.all<EdgeInsets>(
               const EdgeInsets.symmetric(horizontal: 0),

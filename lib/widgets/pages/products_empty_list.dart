@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/app_images.dart';
 
-class EmptyProductsList extends StatelessWidget {
-  const EmptyProductsList({Key? key}) : super(key: key);
+class ProductsEmptyList extends StatelessWidget {
+  const ProductsEmptyList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
