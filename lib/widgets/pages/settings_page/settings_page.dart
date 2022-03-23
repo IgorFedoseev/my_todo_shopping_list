@@ -11,8 +11,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final manager = context.read<SettingsManager>();
-    final setManager = context.watch<SettingsManager>();
+    final manager = context.watch<SettingsManager>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Настройки'),
@@ -33,17 +32,17 @@ class SettingsPage extends StatelessWidget {
               ColorPickerWidget(
                 color: manager.highCurrentColor,
                 text: 'Высокий',
-                changeColor: (color) => setManager.highCurrentColor = color,
+                changeColor: (color) => manager.highCurrentColor = color,
               ),
               ColorPickerWidget(
                 color: manager.mediumCurrentColor,
                 text: 'Средний',
-                changeColor: (color) => setManager.mediumCurrentColor = color,
+                changeColor: (color) => manager.mediumCurrentColor = color,
               ),
               ColorPickerWidget(
                 color: manager.lowCurrentColor,
                 text: 'Низкий',
-                changeColor: (color) => setManager.lowCurrentColor = color,
+                changeColor: (color) => manager.lowCurrentColor = color,
               ),
               const SizedBox(height: 16),
               const HeaderTextWidget(text: 'Справка'),

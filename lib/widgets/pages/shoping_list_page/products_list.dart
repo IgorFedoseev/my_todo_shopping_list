@@ -21,20 +21,16 @@ class ProductsListWidget extends StatelessWidget {
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
-        child: productsScreenList(),
+        child: Consumer<ProductListManager>(
+          builder: (context, productListManager, child) {
+            if (productListManager.products.isNotEmpty) {
+              return ProductsListBuilder(manager: productListManager);
+            } else {
+              return const ProductsEmptyList();
+            }
+          },
+        ),
       ),
-    );
-  }
-
-  Widget productsScreenList() {
-    return Consumer<ProductListManager>(
-      builder: (context, productListManager, child) {
-        if (productListManager.products.isNotEmpty) {
-          return ProductsListBuilder(manager: productListManager);
-        } else {
-          return const ProductsEmptyList();
-        }
-      },
     );
   }
 
