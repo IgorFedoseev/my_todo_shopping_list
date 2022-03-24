@@ -1,22 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_card.dart';
+import 'package:my_to_do_shopping_list/navigation/app_page_paths.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_action_buttons.dart';
 import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductCreateEditWidget extends StatefulWidget {
-
-  final Function(ShoppingList) onCreate;
-  final Function(ShoppingList) onEdit;
+  final void Function(ShoppingList) onCreate;
+  final void Function(ShoppingList) onResumeCreating;
+  final void Function(ShoppingList, int) onEdit;
+  final void Function() quit;
   final ShoppingList? originalProduct;
+  final int index;
   final bool isUpdating;
+
+  static MaterialPage page({
+    ShoppingList? originalProduct,
+    int index = -1,
+    required Function(ShoppingList) onCreate,
+    required Function(ShoppingList) onResumeCreating,
+  required Function(ShoppingList, int) onEdit,
+    required Function() quit,
+  }) {
+    return MaterialPage(
+      name: AppPages.productCreateEditWidget,
+      key: ValueKey(AppPages.productCreateEditWidget),
+      child: ProductCreateEditWidget(
+          onCreate: onCreate,
+          onResumeCreating: onResumeCreating,
+          onEdit: onEdit,
+          quit: quit,
+          index: index,
+          originalProduct: originalProduct),
+    );
+  }
 
   const ProductCreateEditWidget({
     Key? key,
     required this.onCreate,
     required this.onEdit,
+    required this.quit,
+    required this.onResumeCreating,
     this.originalProduct,
+    this.index = -1,
   })  : isUpdating = (originalProduct != null),
         super(key: key);
 
@@ -108,7 +134,6 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
                 ),
               ),
             ),
-            ProductCardWidget(product: _originalProduct ?? completedProduct),
           ],
         ),
       ),
@@ -125,22 +150,22 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
 
   void completeAdding() {
     if (widget.isUpdating) {
-      widget.onEdit(completedProduct);
-      Navigator.pop(context);
+      widget.onEdit(completedProduct, widget.index);
     } else {
-      if(_name.trim().isNotEmpty) {
+      if (_name.trim().isNotEmpty) {
         widget.onCreate(completedProduct);
+      } else {
+        widget.quit();
       }
-      Navigator.pop(context);
     }
   }
 
   void resumeAdding() {
     if (widget.isUpdating) {
-      Navigator.pop(context);
+      widget.quit();
     } else {
-      if(_name.trim().isEmpty) return;
-      widget.onCreate(completedProduct);
+      if (_name.trim().isEmpty) return;
+      widget.onResumeCreating(completedProduct);
       setState(() {
         _nameController.clear();
         _measure = Measure.piece.asString();

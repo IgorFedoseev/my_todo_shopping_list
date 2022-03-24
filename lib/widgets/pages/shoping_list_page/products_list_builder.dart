@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/product_create_edit_form.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_card.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_manager.dart';
 
@@ -21,24 +20,11 @@ class ProductsListBuilder extends StatelessWidget {
         return Slidable(
           key: ObjectKey(product),
           startActionPane: ActionPane(
-            extentRatio: 0.3,
+            extentRatio: 0.33,
             motion: const StretchMotion(),
             children: [
               SlidableAction(
-                onPressed: (context){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProductCreateEditWidget(
-                        originalProduct: product,
-                        onCreate: (product) {},
-                        onEdit: (product) {
-                          manager.editProduct(product, index);
-                        },
-                      ),
-                    ),
-                  );
-                },
+                onPressed: (context) => manager.productTapped(index),
                 backgroundColor: Colors.teal,
                 foregroundColor: Colors.white,
                 icon: Icons.edit,
@@ -46,13 +32,11 @@ class ProductsListBuilder extends StatelessWidget {
             ],
           ),
           endActionPane: ActionPane(
-            extentRatio: 0.3,
+            extentRatio: 0.33,
             motion: const StretchMotion(),
             children: [
               SlidableAction(
-                onPressed: (context){
-                  manager.deleteProduct(index);
-                },
+                onPressed: (context) => manager.deleteProduct(index),
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
                 icon: Icons.delete,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_empty_list.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/product_create_edit_form.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_builder.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_manager.dart';
 import 'package:provider/provider.dart';
@@ -12,12 +10,13 @@ class ProductsListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final manager = context.read<ProductListManager>();
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _tapOnAddButton(context),
+        onPressed: () => manager.createNewProduct(),
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
@@ -29,22 +28,6 @@ class ProductsListWidget extends StatelessWidget {
               return const ProductsEmptyList();
             }
           },
-        ),
-      ),
-    );
-  }
-
-  void _tapOnAddButton(BuildContext context){
-    final manager =
-    Provider.of<ProductListManager>(context, listen: false);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ProductCreateEditWidget(
-          onCreate: (ShoppingList product){
-            manager.addProduct(product);
-          },
-          onEdit: (ShoppingList product){},
         ),
       ),
     );
