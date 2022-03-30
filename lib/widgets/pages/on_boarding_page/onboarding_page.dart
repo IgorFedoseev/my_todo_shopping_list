@@ -7,10 +7,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingPage extends StatefulWidget {
   static MaterialPage page() {
-    return MaterialPage(
-      name: AppPages.onBoardingPath,
-      key: ValueKey(AppPages.onBoardingPath),
-      child: const OnBoardingPage(),
+    return const MaterialPage(
+      name: AppLink.onBoardingPath,
+      key: ValueKey(AppLink.onBoardingPath),
+      child: OnBoardingPage(),
     );
   }
 

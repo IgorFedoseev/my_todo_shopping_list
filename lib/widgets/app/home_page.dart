@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 class HomePage extends StatelessWidget {
   static MaterialPage page(int currentTab) {
     return MaterialPage(
-      name: AppPages.home,
-      key: ValueKey(AppPages.home),
+      name: AppLink.homePath,
+      key: const ValueKey(AppLink.homePath),
       child: HomePage(currentTab: currentTab),
     );
   }

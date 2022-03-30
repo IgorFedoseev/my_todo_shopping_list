@@ -68,7 +68,7 @@ class AppRouter extends RouterDelegate
     if (!route.didPop(result)) {
       return false;
     }
-    if (route.settings.name == AppPages.productCreateEditWidget){
+    if (route.settings.name == AppLink.productCreateEditWidgetPath){
       productListManager.productTapped(-1);
     }
     return true;

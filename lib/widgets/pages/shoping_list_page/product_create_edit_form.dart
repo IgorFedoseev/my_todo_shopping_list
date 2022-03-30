@@ -23,8 +23,8 @@ class ProductCreateEditWidget extends StatefulWidget {
     required Function() quit,
   }) {
     return MaterialPage(
-      name: AppPages.productCreateEditWidget,
-      key: ValueKey(AppPages.productCreateEditWidget),
+      name: AppLink.productCreateEditWidgetPath,
+      key: const ValueKey(AppLink.productCreateEditWidgetPath),
       child: ProductCreateEditWidget(
           onCreate: onCreate,
           onResumeCreating: onResumeCreating,

@@ -49,6 +49,7 @@ class _MyAppState extends State<MyApp> {
             theme: theme,
             home: Router(
               routerDelegate: _appRouter,
+              backButtonDispatcher: RootBackButtonDispatcher(),
             ),
           );
         },
