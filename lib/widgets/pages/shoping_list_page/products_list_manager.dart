@@ -28,6 +28,13 @@ class ProductListManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setSelectedProduct(String id){
+    final index = products.indexWhere((element) => element.id == id);
+    _selectedIndex = index;
+    _createNewProduct = false;
+    notifyListeners();
+  }
+
   void productTapped(int index){
     _selectedIndex = index;
     _createNewProduct = false;

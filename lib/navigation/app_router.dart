@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
-import 'package:my_to_do_shopping_list/navigation/app_page_paths.dart';
+import 'package:my_to_do_shopping_list/navigation/app_links.dart';
 import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/app/home_page.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/on_boarding_page/onboarding_page.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/product_create_edit_form.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_manager.dart';
 
-class AppRouter extends RouterDelegate
+class AppRouter extends RouterDelegate<AppLink>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   @override
   final GlobalKey<NavigatorState> navigatorKey;
@@ -75,5 +75,22 @@ class AppRouter extends RouterDelegate
   }
 
   @override
-  Future<void> setNewRoutePath(configuration) async {} // => null;
+  Future<void> setNewRoutePath(AppLink configuration) async {
+    switch (configuration.location){
+      case AppLink.productCreateEditWidgetPath:
+        final itemId = configuration.itemId;
+        if(itemId != null){
+          productListManager.setSelectedProduct(itemId);
+        } else {
+          productListManager.createNewProduct();
+        }
+        break;
+      case AppLink.homePath:
+        appStateManager.goToTab(configuration.currentTab ?? 0);
+        productListManager.productTapped(-1);
+        break;
+      default:
+        break;
+    }
+  }
 }

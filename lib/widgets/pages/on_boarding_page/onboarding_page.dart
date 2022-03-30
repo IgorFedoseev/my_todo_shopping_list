@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/app_images.dart';
-import 'package:my_to_do_shopping_list/navigation/app_page_paths.dart';
+import 'package:my_to_do_shopping_list/navigation/app_links.dart';
 import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

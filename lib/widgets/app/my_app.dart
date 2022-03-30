@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_to_do_shopping_list/navigation/app_route_parser.dart';
 import 'package:my_to_do_shopping_list/navigation/app_router.dart';
 import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_manager.dart';
@@ -18,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   final _productListManager = ProductListManager();
   final _settingsManager = SettingsManager();
   late AppRouter _appRouter;
+  final routeParser = AppRouteParser();
 
   @override
   void initState() {
@@ -44,13 +46,12 @@ class _MyAppState extends State<MyApp> {
           } else {
             theme = AppTheme.light();
           }
-          return MaterialApp(
+          return MaterialApp.router(
             title: 'To-do shopping list',
             theme: theme,
-            home: Router(
-              routerDelegate: _appRouter,
-              backButtonDispatcher: RootBackButtonDispatcher(),
-            ),
+            routerDelegate: _appRouter,
+            routeInformationParser: routeParser,
+            backButtonDispatcher: RootBackButtonDispatcher(),
           );
         },
       ),
