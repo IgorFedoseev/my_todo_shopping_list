@@ -1,5 +1,6 @@
 class AppLink {
   static const String homePath = '/';
+  static const String splashScreen = '/splash_screen';
   static const String onBoardingPath = '/on_boarding';
   static const String productCreateEditWidgetPath = '/product';
   static const String tabParam = 'tab';
@@ -33,6 +34,8 @@ class AppLink {
     String addKeyValuePair({required String key, String? value}) =>
         value == null ? '' : '$key=$value&';
     switch (location) {
+      case splashScreen:
+        return splashScreen;
       case onBoardingPath:
         return onBoardingPath;
       case productCreateEditWidgetPath:

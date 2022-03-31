@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_empty_list.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_builder.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_manager.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/shopping_list_page/products_empty_list.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/shopping_list_page/products_list_builder.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/shopping_list_page/products_list_manager.dart';
 import 'package:provider/provider.dart';
 
 class ProductsListWidget extends StatelessWidget {

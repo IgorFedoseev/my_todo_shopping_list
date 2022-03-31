@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/navigation/app_links.dart';
 import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/shopping_list_page/products_list.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/settings_page/settings_page.dart';
 import 'package:provider/provider.dart';
 

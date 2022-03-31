@@ -3,9 +3,10 @@ import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 import 'package:my_to_do_shopping_list/navigation/app_links.dart';
 import 'package:my_to_do_shopping_list/widgets/app/app_state_manager.dart';
 import 'package:my_to_do_shopping_list/widgets/app/home_page.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/app_is_not_initialized_screen/splash_screen.dart';
 import 'package:my_to_do_shopping_list/widgets/pages/on_boarding_page/onboarding_page.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/product_create_edit_form.dart';
-import 'package:my_to_do_shopping_list/widgets/pages/shoping_list_page/products_list_manager.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/shopping_list_page/product_create_edit_form.dart';
+import 'package:my_to_do_shopping_list/widgets/pages/shopping_list_page/products_list_manager.dart';
 
 class AppRouter extends RouterDelegate<AppLink>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
@@ -35,7 +36,10 @@ class AppRouter extends RouterDelegate<AppLink>
       key: navigatorKey,
       onPopPage: _handlePopPage,
       pages: [
-        if (!appStateManager.isOnBoardingComplete) OnBoardingPage.page(),
+        if (!appStateManager.isInitialize) SplashScreen.page(),
+        if (appStateManager.isInitialize &&
+            !appStateManager.isOnBoardingComplete)
+          OnBoardingPage.page(),
         if (appStateManager.isOnBoardingComplete)
           HomePage.page(appStateManager.getSelectedTab),
         if (productListManager.isCreatingNewProduct)
@@ -55,7 +59,7 @@ class AppRouter extends RouterDelegate<AppLink>
             index: productListManager.selectedIndex,
             onCreate: (ShoppingList product) {},
             onResumeCreating: (ShoppingList product) {},
-            onEdit: (ShoppingList product, int index){
+            onEdit: (ShoppingList product, int index) {
               productListManager.editProduct(product, index);
             },
             quit: productListManager.completeCreatingProduct,
@@ -68,18 +72,36 @@ class AppRouter extends RouterDelegate<AppLink>
     if (!route.didPop(result)) {
       return false;
     }
-    if (route.settings.name == AppLink.productCreateEditWidgetPath){
+    if (route.settings.name == AppLink.productCreateEditWidgetPath) {
       productListManager.productTapped(-1);
     }
     return true;
   }
 
+  AppLink getCurrentPath() {
+    if (!appStateManager.isOnBoardingComplete) {
+      return AppLink(location: AppLink.onBoardingPath);
+    } else if (productListManager.isCreatingNewProduct) {
+      return AppLink(location: AppLink.productCreateEditWidgetPath);
+    } else if (productListManager.selectedProduct != null) {
+      final id = productListManager.selectedProduct?.id;
+      return AppLink(location: AppLink.productCreateEditWidgetPath, itemId: id);
+    } else {
+      return AppLink(
+          location: AppLink.homePath,
+          currentTab: appStateManager.getSelectedTab);
+    }
+  }
+
+  @override
+  AppLink get currentConfiguration => getCurrentPath();
+
   @override
   Future<void> setNewRoutePath(AppLink configuration) async {
-    switch (configuration.location){
+    switch (configuration.location) {
       case AppLink.productCreateEditWidgetPath:
         final itemId = configuration.itemId;
-        if(itemId != null){
+        if (itemId != null) {
           productListManager.setSelectedProduct(itemId);
         } else {
           productListManager.createNewProduct();
