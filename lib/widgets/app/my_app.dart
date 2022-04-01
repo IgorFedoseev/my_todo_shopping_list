@@ -34,9 +34,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => _appStateManager),
-        ChangeNotifierProvider(create: (context) => _productListManager),
-        ChangeNotifierProvider(create: (context) => _settingsManager),
+        ChangeNotifierProvider(create: (_) => _appStateManager),
+        ChangeNotifierProvider(create: (_) => _productListManager),
+        ChangeNotifierProvider(create: (_) => _settingsManager),
       ],
       child: Consumer<SettingsManager>(
         builder: (context, settingsManager, _) {
