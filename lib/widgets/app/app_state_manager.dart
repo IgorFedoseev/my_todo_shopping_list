@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/app_cashe.dart';
 
@@ -20,14 +19,13 @@ class AppStateManager extends ChangeNotifier {
 
   void initializeApp() async{
     _onBoardingComplete = await _appCache.didOnBoardingCompleted();
+    _isInitialize = true;
+    notifyListeners();
 
-    Timer(
-      const Duration(seconds: 1),
-      () {
-        _isInitialize = true;
-        notifyListeners();
-      },
-    );
+    // Timer(
+    //   const Duration(seconds: 1),
+    //   () {},
+    // );
   }
 
   void completeOnBoarding() async{
