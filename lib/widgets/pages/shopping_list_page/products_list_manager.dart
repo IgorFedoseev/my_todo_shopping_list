@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 
 class ProductListManager extends ChangeNotifier {
-  final _products = <ShoppingList>[];
+  final _products = <ShoppingListUnit>[];
   bool _createNewProduct = false;
   int _selectedIndex = -1;
 
-  List<ShoppingList> get products => _products;
+  List<ShoppingListUnit> get products => _products;
   bool get isCreatingNewProduct => _createNewProduct;
   int get selectedIndex => _selectedIndex;
-  ShoppingList? get selectedProduct =>
+  ShoppingListUnit? get selectedProduct =>
       _selectedIndex != -1 ? _products[_selectedIndex] : null;
 
   void createNewProduct() {
@@ -41,18 +41,18 @@ class ProductListManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addCompleteProduct(ShoppingList product) {
+  void addCompleteProduct(ShoppingListUnit product) {
     _products.add(product);
     _createNewProduct = false;
     notifyListeners();
   }
 
-  void addResumeProduct(ShoppingList product) {
+  void addResumeProduct(ShoppingListUnit product) {
     _products.add(product);
     notifyListeners();
   }
 
-  void editProduct(ShoppingList product, int index) {
+  void editProduct(ShoppingListUnit product, int index) {
     _products[index] = product;
     _selectedIndex = -1;
     _createNewProduct = false;

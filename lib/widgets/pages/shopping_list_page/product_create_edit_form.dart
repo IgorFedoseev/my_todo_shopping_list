@@ -6,20 +6,20 @@ import 'package:my_to_do_shopping_list/widgets/style/app_theme.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductCreateEditWidget extends StatefulWidget {
-  final void Function(ShoppingList) onCreate;
-  final void Function(ShoppingList) onResumeCreating;
-  final void Function(ShoppingList, int) onEdit;
+  final void Function(ShoppingListUnit) onCreate;
+  final void Function(ShoppingListUnit) onResumeCreating;
+  final void Function(ShoppingListUnit, int) onEdit;
   final void Function() quit;
-  final ShoppingList? originalProduct;
+  final ShoppingListUnit? originalProduct;
   final int index;
   final bool isUpdating;
 
   static MaterialPage page({
-    ShoppingList? originalProduct,
+    ShoppingListUnit? originalProduct,
     int index = -1,
-    required Function(ShoppingList) onCreate,
-    required Function(ShoppingList) onResumeCreating,
-  required Function(ShoppingList, int) onEdit,
+    required Function(ShoppingListUnit) onCreate,
+    required Function(ShoppingListUnit) onResumeCreating,
+  required Function(ShoppingListUnit, int) onEdit,
     required Function() quit,
   }) {
     return MaterialPage(
@@ -140,7 +140,7 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
     );
   }
 
-  ShoppingList get completedProduct => ShoppingList(
+  ShoppingListUnit get completedProduct => ShoppingListUnit(
         id: widget.originalProduct?.id ?? const Uuid().v1(),
         name: _name,
         measure: _measure,

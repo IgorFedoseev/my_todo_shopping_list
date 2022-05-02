@@ -44,22 +44,22 @@ class AppRouter extends RouterDelegate<AppLink>
           HomePage.page(appStateManager.getSelectedTab),
         if (productListManager.isCreatingNewProduct)
           ProductCreateEditWidget.page(
-            onCreate: (ShoppingList product) {
+            onCreate: (ShoppingListUnit product) {
               productListManager.addCompleteProduct(product);
             },
-            onResumeCreating: (ShoppingList product) {
+            onResumeCreating: (ShoppingListUnit product) {
               productListManager.addResumeProduct(product);
             },
-            onEdit: (ShoppingList product, int index) {},
+            onEdit: (ShoppingListUnit product, int index) {},
             quit: productListManager.completeCreatingProduct,
           ),
         if (productListManager.selectedIndex != -1)
           ProductCreateEditWidget.page(
             originalProduct: productListManager.selectedProduct,
             index: productListManager.selectedIndex,
-            onCreate: (ShoppingList product) {},
-            onResumeCreating: (ShoppingList product) {},
-            onEdit: (ShoppingList product, int index) {
+            onCreate: (ShoppingListUnit product) {},
+            onResumeCreating: (ShoppingListUnit product) {},
+            onEdit: (ShoppingListUnit product, int index) {
               productListManager.editProduct(product, index);
             },
             quit: productListManager.completeCreatingProduct,

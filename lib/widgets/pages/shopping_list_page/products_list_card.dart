@@ -3,7 +3,7 @@ import 'package:my_to_do_shopping_list/app_images.dart';
 import 'package:my_to_do_shopping_list/domain/entity/product.dart';
 
 class ProductCardWidget extends StatelessWidget {
-  final ShoppingList product;
+  final ShoppingListUnit product;
   final TextDecoration textDecoration;
 
   ProductCardWidget({

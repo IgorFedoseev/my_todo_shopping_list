@@ -22,26 +22,14 @@ extension MeasureAsString on Measure {
   }
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class ProductMock {
-  final List<ShoppingList> shoppingList;
-  ProductMock({
-    required this.shoppingList,
-  });
-
-  factory ProductMock.fromJson(Map<String, dynamic> json) =>
-      _$ProductMockFromJson(json);
-  Map<String, dynamic> toJson() => _$ProductMockToJson(this);
-}
-
 @JsonSerializable(fieldRename: FieldRename.snake)
-class ShoppingList {
+class ShoppingListUnit {
   final String id;
   final String name;
   final int quantity;
   final String measure;
   final bool isTaken;
-  ShoppingList({
+  ShoppingListUnit({
     required this.id,
     required this.name,
     required this.quantity,
@@ -49,18 +37,18 @@ class ShoppingList {
     required this.isTaken,
   });
 
-  factory ShoppingList.fromJson(Map<String, dynamic> json) =>
-      _$ShoppingListFromJson(json);
-  Map<String, dynamic> toJson() => _$ShoppingListToJson(this);
+  factory ShoppingListUnit.fromJson(Map<String, dynamic> json) =>
+      _$ShoppingListUnitFromJson(json);
+  Map<String, dynamic> toJson() => _$ShoppingListUnitToJson(this);
 
-  ShoppingList copyWith({
+  ShoppingListUnit copyWith({
     String? id,
     String? name,
     int? quantity,
     String? measure,
     bool? isTaken,
   }) {
-    return ShoppingList(
+    return ShoppingListUnit(
       id: id ?? this.id,
       name: name ?? this.name,
       quantity: quantity ?? this.quantity,
