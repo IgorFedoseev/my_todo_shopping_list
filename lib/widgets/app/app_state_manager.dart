@@ -21,7 +21,6 @@ class AppStateManager extends ChangeNotifier {
     _onBoardingComplete = await _appCache.didOnBoardingCompleted();
     _isInitialize = true;
     notifyListeners();
-
     // Timer(
     //   const Duration(seconds: 1),
     //   () {},
