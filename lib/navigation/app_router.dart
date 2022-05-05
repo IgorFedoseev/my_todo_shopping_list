@@ -78,41 +78,6 @@ class AppRouter extends RouterDelegate<AppLink>
     return true;
   }
 
-  AppLink getCurrentPath() {
-    if (!appStateManager.isOnBoardingComplete) {
-      return AppLink(location: AppLink.onBoardingPath);
-    } else if (productListManager.isCreatingNewProduct) {
-      return AppLink(location: AppLink.productCreateEditWidgetPath);
-    } else if (productListManager.selectedProduct != null) {
-      final id = productListManager.selectedProduct?.id;
-      return AppLink(location: AppLink.productCreateEditWidgetPath, itemId: id);
-    } else {
-      return AppLink(
-          location: AppLink.homePath,
-          currentTab: appStateManager.getSelectedTab);
-    }
-  }
-
   @override
-  AppLink get currentConfiguration => getCurrentPath();
-
-  @override
-  Future<void> setNewRoutePath(AppLink configuration) async {
-    switch (configuration.location) {
-      case AppLink.productCreateEditWidgetPath:
-        final itemId = configuration.itemId;
-        if (itemId != null) {
-          productListManager.setSelectedProduct(itemId);
-        } else {
-          productListManager.createNewProduct();
-        }
-        break;
-      case AppLink.homePath:
-        appStateManager.goToTab(configuration.currentTab ?? 0);
-        productListManager.productTapped(-1);
-        break;
-      default:
-        break;
-    }
-  }
+  Future<void> setNewRoutePath(AppLink configuration) async {}
 }
