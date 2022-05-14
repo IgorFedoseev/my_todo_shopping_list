@@ -29,7 +29,7 @@ class ProductListManager extends ChangeNotifier {
   }
 
   void setSelectedProduct(String id){
-    final index = products.indexWhere((element) => element.id == id);
+    final index = products.indexWhere((element) => element.productId == id);
     _selectedIndex = index;
     _createNewProduct = false;
     notifyListeners();

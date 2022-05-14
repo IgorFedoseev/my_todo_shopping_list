@@ -46,7 +46,7 @@ class ProductsListBuilder extends StatelessWidget {
           child: GestureDetector(
             onTap: () => manager.completeProduct(index, change),
             child: ProductCardWidget(
-              key: ValueKey(product.id),
+              key: ValueKey(product.productId),
               product: product,
             ),
           ),

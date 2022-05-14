@@ -141,7 +141,7 @@ class _ProductCreateEditWidgetState extends State<ProductCreateEditWidget> {
   }
 
   ShoppingListUnit get completedProduct => ShoppingListUnit(
-        id: widget.originalProduct?.id ?? const Uuid().v1(),
+        productId: widget.originalProduct?.productId ?? const Uuid().v1(),
         name: _name,
         measure: _measure,
         quantity: _quantity,

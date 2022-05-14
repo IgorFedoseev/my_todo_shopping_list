@@ -22,15 +22,20 @@ extension MeasureAsString on Measure {
   }
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class ShoppingListUnit {
-  final String id;
+  final String productId;
   final String name;
   final int quantity;
   final String measure;
+  @JsonKey(fromJson: _boolFromInt, toJson: _boolToInt)
   final bool isTaken;
+
+  static bool _boolFromInt(int isTaken) => isTaken == 1;
+  static int _boolToInt(bool isTaken) => isTaken ? 1 : 0;
+
   ShoppingListUnit({
-    required this.id,
+    required this.productId,
     required this.name,
     required this.quantity,
     required this.measure,
@@ -42,14 +47,14 @@ class ShoppingListUnit {
   Map<String, dynamic> toJson() => _$ShoppingListUnitToJson(this);
 
   ShoppingListUnit copyWith({
-    String? id,
+    String? productId,
     String? name,
     int? quantity,
     String? measure,
     bool? isTaken,
   }) {
     return ShoppingListUnit(
-      id: id ?? this.id,
+      productId: productId ?? this.productId,
       name: name ?? this.name,
       quantity: quantity ?? this.quantity,
       measure: measure ?? this.measure,

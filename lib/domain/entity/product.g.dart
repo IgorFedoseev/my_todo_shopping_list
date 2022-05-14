@@ -8,18 +8,18 @@ part of 'product.dart';
 
 ShoppingListUnit _$ShoppingListUnitFromJson(Map<String, dynamic> json) =>
     ShoppingListUnit(
-      id: json['id'] as String,
+      productId: json['productId'] as String,
       name: json['name'] as String,
       quantity: json['quantity'] as int,
       measure: json['measure'] as String,
-      isTaken: json['is_taken'] as bool,
+      isTaken: ShoppingListUnit._boolFromInt(json['isTaken'] as int),
     );
 
 Map<String, dynamic> _$ShoppingListUnitToJson(ShoppingListUnit instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'productId': instance.productId,
       'name': instance.name,
       'quantity': instance.quantity,
       'measure': instance.measure,
-      'is_taken': instance.isTaken,
+      'isTaken': ShoppingListUnit._boolToInt(instance.isTaken),
     };
